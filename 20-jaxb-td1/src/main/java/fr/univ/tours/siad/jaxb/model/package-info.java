@@ -1,0 +1,1 @@
+package fr.univ.tours.siad.jaxb.model;
