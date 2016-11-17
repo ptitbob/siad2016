@@ -1,0 +1,31 @@
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (1, '97105', '01', 'Guadeloupe', 'GUADELOUPE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (2, '97209', '02', 'Martinique', 'MARTINIQUE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (3, '97302', '03', 'Guyane', 'GUYANE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (4, '97411', '04', 'La Réunion', 'LA REUNION');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (5, '97608', '06', 'Mayotte', 'MAYOTTE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (6, '75056', '11', 'Île-de-France', 'ILE-DE-FRANCE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (7, '51108', '21', 'Champagne-Ardenne', 'CHAMPAGNE-ARDENNE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (8, '80021', '22', 'Picardie', 'PICARDIE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (9, '76540', '23', 'Haute-Normandie', 'HAUTE-NORMANDIE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (10, '45234', '24', 'Centre', 'CENTRE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (11, '14118', '25', 'Basse-Normandie', 'BASSE-NORMANDIE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (12, '21231', '26', 'Bourgogne', 'BOURGOGNE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (13, '59350', '31', 'Nord-Pas-de-Calais', 'NORD-PAS-DE-CALAIS');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (14, '57463', '41', 'Lorraine', 'LORRAINE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (15, '67482', '42', 'Alsace', 'ALSACE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (16, '25056', '43', 'Franche-Comté', 'FRANCHE-COMTE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (17, '44109', '52', 'Pays de la Loire', 'PAYS DE LA LOIRE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (18, '35238', '53', 'Bretagne', 'BRETAGNE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (19, '86194', '54', 'Poitou-Charentes', 'POITOU-CHARENTES');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (20, '33063', '72', 'Aquitaine', 'AQUITAINE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (21, '31555', '73', 'Midi-Pyrénées', 'MIDI-PYRENEES');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (22, '87085', '74', 'Limousin', 'LIMOUSIN');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (23, '69123', '82', 'Rhône-Alpes', 'RHONE-ALPES');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (24, '63113', '83', 'Auvergne', 'AUVERGNE');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (25, '34172', '91', 'Languedoc-Roussillon', 'LANGUEDOC-ROUSSILLON');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (26, '13055', '93', 'Provence-Alpes-Côte d''Azur', 'PROVENCE-ALPES-COTE D''AZUR');
+INSERT INTO "region" ("region_id", "cheflieuid", "inseeid", "name", "uppername") VALUES (27, '2A004', '94', 'Corse', 'CORSE');
+
+SELECT pg_catalog.setval('"region_sequence"', 27, true);
+
+commit;
