@@ -20,7 +20,7 @@
         <log4j.version>2.3</log4j.version>
         <slf4j.version>1.7.6</slf4j.version>
         <jackson.version>2.6.1</jackson.version>
-        <postgresql.version>9.4-1201-jdbc41</postgresql.version>
+        <postgresql.version>9.4.1207</postgresql.version>
     </properties>
 
     <dependencyManagement>
@@ -40,6 +40,39 @@
                 <artifactId>junit</artifactId>
                 <version>4.12</version>
                 <scope>test</scope>
+            </dependency>
+            <!-- wildfly swarm -->
+            <dependency>
+                <groupId>org.wildfly.swarm</groupId>
+                <artifactId>microprofile</artifactId>
+                <version>${wildfly.swarm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wildfly.swarm</groupId>
+                <artifactId>jpa</artifactId>
+                <version>${wildfly.swarm.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.wildfly.swarm</groupId>
+                        <artifactId>h2</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.wildfly.swarm</groupId>
+                <artifactId>datasources</artifactId>
+                <version>${wildfly.swarm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wildfly.swarm</groupId>
+                <artifactId>ejb</artifactId>
+                <version>${wildfly.swarm.version}</version>
+            </dependency>
+            <!-- postgres -->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
