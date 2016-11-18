@@ -3,9 +3,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>siad2015</artifactId>
-        <groupId>fr.univ-tours.siad</groupId>
-        <version>1.0</version>
+        <groupId>fr.univ.blois</groupId>
+        <artifactId>siad</artifactId>
+        <version>2016.1</version>
+        <relativePath>..</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -17,8 +18,9 @@
             <artifactId>javaee-web-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>fr.univ-tours.siad</groupId>
+            <groupId>fr.univ.blois</groupId>
             <artifactId>util</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <!--
