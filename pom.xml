@@ -12,6 +12,8 @@
 
     <modules>
         <module>20-jaxb-td1</module>
+        <module>90-util</module>
+        <module>91-data</module>
     </modules>
 
     <properties>
