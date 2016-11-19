@@ -7,15 +7,9 @@ import org.apache.logging.log4j.Logger;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.wildfly.swarm.Swarm;
-import org.wildfly.swarm.config.logging.Level;
 import org.wildfly.swarm.datasources.DatasourcesFraction;
 import org.wildfly.swarm.jaxrs.JAXRSArchive;
 import org.wildfly.swarm.jpa.JPAFraction;
-import org.wildfly.swarm.logging.LoggingFraction;
-
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 
 /**

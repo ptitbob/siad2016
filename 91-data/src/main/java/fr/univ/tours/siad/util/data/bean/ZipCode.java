@@ -1,7 +1,11 @@
 package fr.univ.tours.siad.util.data.bean;
 
-import javax.persistence.*;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import java.util.Objects;
 
 import static javax.persistence.GenerationType.SEQUENCE;

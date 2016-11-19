@@ -5,7 +5,9 @@ import fr.univ.tours.siad.jaxb.model.person.Adherent;
 import fr.univ.tours.siad.jaxb.model.person.Donor;
 import fr.univ.tours.siad.jaxb.model.person.Person;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 
 public class Association {
 

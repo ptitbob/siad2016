@@ -2,10 +2,8 @@ package fr.univ.blois.insee.service.api;
 
 import fr.univ.blois.insee.service.services.RegionService;
 import fr.univ.tours.siad.util.data.bean.Region;
-import org.apache.logging.log4j.Logger;
 
 import javax.ejb.EJB;
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;

@@ -1,14 +1,18 @@
 package fr.univ.tours.siad.util.data.bean;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
-import java.util.Set;
-
-import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @SequenceGenerator(name = "region_sequence", sequenceName = "region_sequence", allocationSize = 1)

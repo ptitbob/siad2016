@@ -2,7 +2,12 @@ package fr.univ.tours.siad.jaxb;
 
 import fr.univ.tours.siad.jaxb.model.club.Sport;
 import fr.univ.tours.siad.jaxb.model.club.SportType;
-import fr.univ.tours.siad.jaxb.model.person.*;
+import fr.univ.tours.siad.jaxb.model.person.Address;
+import fr.univ.tours.siad.jaxb.model.person.Adherent;
+import fr.univ.tours.siad.jaxb.model.person.BoardMember;
+import fr.univ.tours.siad.jaxb.model.person.BoardMemberType;
+import fr.univ.tours.siad.jaxb.model.person.Donor;
+import fr.univ.tours.siad.jaxb.model.person.DonorType;
 import fr.univ.tours.siad.jaxb.util.ValidateProcess;
 import org.junit.Test;
 
