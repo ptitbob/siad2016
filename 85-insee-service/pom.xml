@@ -13,6 +13,16 @@
     <artifactId>insee-service</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>fr.univ.blois</groupId>
+            <artifactId>util</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.univ.blois</groupId>
+            <artifactId>data</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- API JavaEE profile web -->
         <dependency>
             <groupId>javax</groupId>

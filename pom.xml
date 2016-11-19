@@ -88,6 +88,11 @@
                 <artifactId>postgresql</artifactId>
                 <version>${wildfly.swarm.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.wildfly.swarm</groupId>
+                <artifactId>logging</artifactId>
+                <version>${wildfly.swarm.version}</version>
+            </dependency>
             <!-- postgres -->
             <dependency>
                 <groupId>org.postgresql</groupId>

@@ -1,6 +1,10 @@
 package fr.univ.tours.siad.util.data.bean;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,6 +17,8 @@ import static javax.persistence.FetchType.LAZY;
         , @NamedQuery(name = Region.COUNT, query = "select count(r) from Region r")
         , @NamedQuery(name = Region.FIND_BY_INSEEID, query = "select r from Region r where r.inseeId = :" + Region.INSEEID)
 })
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Region {
 
     /**
@@ -30,6 +36,7 @@ public class Region {
     /**
      * Identifiant (PK)
      */
+    @XmlAttribute
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "region_sequence")
     @Column(name = "region_id")
     private Long id;
@@ -57,12 +64,6 @@ public class Region {
      */
     @Column(length = 100)
     private String name;
-
-    /**
-     * Liste des départements
-     */
-    @OneToMany(fetch = LAZY, mappedBy = "region")
-    private Set<District> districtSet;
 
     /**
      * Constructeur
@@ -115,14 +116,6 @@ public class Region {
 
     public void setUpperName(String upperName) {
         this.upperName = upperName;
-    }
-
-    public Set<District> getDistrictSet() {
-        return districtSet;
-    }
-
-    public void setDistrictSet(Set<District> districtSet) {
-        this.districtSet = districtSet;
     }
 
     @Override
