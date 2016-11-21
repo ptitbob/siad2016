@@ -29,4 +29,19 @@ public class RegionDetailDto extends RegionDto {
     this.districtSet = districtSet;
   }
 
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Set<DistrictDto> getDistrictSet() {
+    return districtSet;
+  }
+
+  public void setDistrictSet(Set<DistrictDto> districtSet) {
+    this.districtSet = districtSet;
+  }
 }
