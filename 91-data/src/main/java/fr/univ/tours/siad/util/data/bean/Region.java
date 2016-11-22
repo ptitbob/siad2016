@@ -1,13 +1,16 @@
 package fr.univ.tours.siad.util.data.bean;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -55,11 +58,9 @@ public class Region {
   @Column(name = "inseeid", length = 2)
   private String inseeId;
 
-  /**
-   * N° INSEE de la prefecture de region
-   */
-  @Column(name = "cheflieuid", length = 5)
-  private String chefLieuId;
+  @OneToOne
+  @JoinColumn(name = "cheflieuid", referencedColumnName = "inseeid")
+  private City chefLieu;
 
   /**
    * Nom en majuscule
@@ -85,13 +86,6 @@ public class Region {
   public Region() {
   }
 
-  public Region(String... regionAsStringArray) {
-    this.setInseeId(regionAsStringArray[0]);
-    this.setChefLieuId(regionAsStringArray[1]);
-    this.setName(regionAsStringArray[4]);
-    this.setUpperName(regionAsStringArray[3]);
-  }
-
   public Long getId() {
     return id;
   }
@@ -100,12 +94,12 @@ public class Region {
     this.id = id;
   }
 
-  public String getChefLieuId() {
-    return chefLieuId;
+  public City getChefLieu() {
+    return chefLieu;
   }
 
-  public void setChefLieuId(String dhefLieuId) {
-    this.chefLieuId = dhefLieuId;
+  public void setChefLieu(City chefLieu) {
+    this.chefLieu = chefLieu;
   }
 
   public String getInseeId() {

@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
+import java.io.Serializable;
 import java.util.Objects;
 
 import static javax.persistence.FetchType.LAZY;
@@ -26,7 +27,9 @@ import static javax.persistence.GenerationType.SEQUENCE;
         , @NamedQuery(name = District.FIND_BY_REGION, query = "select d from District d where d.region.inseeId = :" + Region.INSEEID)
         , @NamedQuery(name = District.COUNT_FOR_REGION, query = "select count(d) from District d where d.region.inseeId = :" + Region.INSEEID)
 })
-public class District {
+public class District implements Serializable {
+
+    private static final long serialVersionUID = 8602313854577222087L;
 
     /**
      * Renvoi la liste des département

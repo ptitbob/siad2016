@@ -10,13 +10,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Min;
+import java.io.Serializable;
 
 /**
  * Created by francois on 06/10/15.
  */
 @Entity
 @SequenceGenerator(name = "address_sequence", sequenceName = "address_sequence", allocationSize = 1)
-public class Address {
+public class Address implements Serializable {
+
+    private static final long serialVersionUID = 7676953046933420988L;
 
     private static final String CITY_FK = "CITY_FK";
     private static final String ZIPCODE_FK = "ZIPCODE_FK";

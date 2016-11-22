@@ -8,7 +8,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,7 +32,9 @@ import static javax.persistence.GenerationType.SEQUENCE;
         , @NamedQuery(name = City.FIND_CITY_BY_STATUS_FOR_DISTRICT, query = "select c from City c where c.district.inseeId = :" + District.INSEEID + " and c.cityStatus.label = :" + CityStatus.CITY_LABEL)
         , @NamedQuery(name = City.FIND_BY_INSEE, query = "select c from City c where c.inseeId = :" + City.INSEEID)
 })
-public class City {
+public class City implements Serializable {
+
+    private static final long serialVersionUID = -4674087310317576541L;
 
     /**
      * Requete renvoyant le nombre de ville
@@ -56,7 +61,7 @@ public class City {
      * Requete revoyant la liste des ville lié à ce numero INSEE - c'est un numero unique !
      */
     public static final String FIND_BY_INSEE = "City.FIND_BY_INSEE";
-    
+
     public static final String CITY_ID = "id";
     public static final String INSEEID = "CITY_INSEEID";
 
@@ -69,7 +74,8 @@ public class City {
     /**
      * Region
      */
-    @ManyToOne(fetch = LAZY)
+    @OneToOne(fetch = LAZY)
+    @PrimaryKeyJoinColumn
     private Region region;
 
     /**

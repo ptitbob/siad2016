@@ -13,11 +13,11 @@ import java.util.stream.Collectors;
 public class BeanMapper {
 
   public RegionDto getRegionDto(Region region) {
-    return new RegionDto(region.getId(), region.getInseeId(), region.getChefLieuId(), region.getUpperName());
+    return new RegionDto(region.getId(), region.getInseeId(), region.getChefLieu().getInseeId(), region.getUpperName());
   }
 
   public RegionDetailDto getRegionDetailDto(Region region) {
-    return new RegionDetailDto(region.getId(), region.getInseeId(), region.getChefLieuId(), region.getUpperName(), region.getName(), region.getDistrictSet().stream().map(this::getDsitrictDto).collect(Collectors.toSet()));
+    return new RegionDetailDto(region.getId(), region.getInseeId(), region.getChefLieu().getInseeId(), region.getUpperName(), region.getName(), region.getDistrictSet().stream().map(this::getDsitrictDto).collect(Collectors.toSet()));
   }
 
   private DistrictDto getDsitrictDto(District district) {
