@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<address identifiant="1">
+    <Ligne>Ligne 1</Ligne>
+    <Ligne>Ligne 2</Ligne>
+    <code_postal>37000</code_postal>
+    <ville>Tours</ville>
+</address>

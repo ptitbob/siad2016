@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<donnateur type="PP" identifiant="2">
+    <Prenom>Anthony Jr</Prenom>
+    <Nom>Stark</Nom>
+    <addresse_principale identifiant="2">
+        <Ligne>Ligne 2.1</Ligne>
+        <Ligne>Ligne 2.2</Ligne>
+        <code_postal>37000</code_postal>
+        <ville>Tours</ville>
+    </addresse_principale>
+    <donnation>10000000</donnation>
+</donnateur>
