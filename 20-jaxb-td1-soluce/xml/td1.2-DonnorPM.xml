@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<donnateur type="PM" identifiant="1">
+    <Nom>Entreprise 1</Nom>
+    <addresse_principale identifiant="1">
+        <Ligne>Ligne 1.1</Ligne>
+        <Ligne>Ligne 1.2</Ligne>
+        <code_postal>37000</code_postal>
+        <ville>Tours</ville>
+    </addresse_principale>
+    <donnation>1000</donnation>
+</donnateur>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<association_sportive sport="basketball" sport_type="100" nombre_equipe="10" identifiant="42">
+    <nom>Vivas Basket</nom>
+    <membres>
+        <membre_bureau poste="président" identifiant="10">
+            <Prenom>machin</Prenom>
+            <Nom>truc</Nom>
+            <addresse_principale identifiant="1">
+                <Ligne>Ligne 1.1</Ligne>
+                <Ligne>Ligne 1.2</Ligne>
+                <code_postal>37000</code_postal>
+                <ville>Tours</ville>
+            </addresse_principale>
+            <membershipDate>1999-12-31</membershipDate>
+        </membre_bureau>
+        <membre_bureau poste="trésorier" identifiant="11">
+            <Prenom>bidule</Prenom>
+            <Nom>truc</Nom>
+            <addresse_principale identifiant="2">
+                <Ligne>Ligne 2.1</Ligne>
+                <Ligne>Ligne 2.2</Ligne>
+                <code_postal>37250</code_postal>
+                <ville>Veigné</ville>
+            </addresse_principale>
+            <membershipDate>2005-02-12</membershipDate>
+        </membre_bureau>
+        <adherent identifiant="101">
+            <Prenom>Player</Prenom>
+            <Nom>One</Nom>
+            <addresse_principale identifiant="2001">
+                <Ligne>Ligne 2001.1</Ligne>
+                <Ligne>Ligne 2001.2</Ligne>
+                <code_postal>37250</code_postal>
+                <ville>Veigné</ville>
+            </addresse_principale>
+            <membershipDate>2005-02-12</membershipDate>
+        </adherent>
+        <adherent identifiant="102">
+            <Prenom>Player</Prenom>
+            <Nom>Two</Nom>
+            <addresse_principale identifiant="2002">
+                <Ligne>Ligne 2002.1</Ligne>
+                <Ligne>Ligne 2002.2</Ligne>
+                <code_postal>37250</code_postal>
+                <ville>Veigné</ville>
+            </addresse_principale>
+            <membershipDate>2004-01-16</membershipDate>
+        </adherent>
+        <adherent identifiant="103">
+            <Prenom>Player</Prenom>
+            <Nom>Three</Nom>
+            <addresse_principale identifiant="2003">
+                <Ligne>Ligne 2003.1</Ligne>
+                <Ligne>Ligne 2003.2</Ligne>
+                <code_postal>37250</code_postal>
+                <ville>Veigné</ville>
+            </addresse_principale>
+            <membershipDate>2008-05-01</membershipDate>
+        </adherent>
+        <adherent identifiant="104">
+            <Prenom>Tony</Prenom>
+            <Nom>Parker</Nom>
+            <addresse_principale identifiant="2004">
+                <Ligne>Ligne 2004.1</Ligne>
+                <Ligne>Ligne 2004.2</Ligne>
+                <code_postal>37250</code_postal>
+                <ville>Veigné</ville>
+            </addresse_principale>
+            <membershipDate>2013-09-20</membershipDate>
+        </adherent>
+        <adherent identifiant="105">
+            <Prenom>Rudy</Prenom>
+            <Nom>Gobert</Nom>
+            <addresse_principale identifiant="2005">
+                <Ligne>Ligne 2005.1</Ligne>
+                <Ligne>Ligne 2005.2</Ligne>
+                <code_postal>37250</code_postal>
+                <ville>Veigné</ville>
+            </addresse_principale>
+            <membershipDate>2013-09-20</membershipDate>
+        </adherent>
+        <donnateur type="PP" identifiant="2">
+            <Prenom>Anthony Jr</Prenom>
+            <Nom>Stark</Nom>
+            <addresse_principale identifiant="255">
+                <Ligne>Ligne 2.1</Ligne>
+                <Ligne>Ligne 2.2</Ligne>
+                <code_postal>37000</code_postal>
+                <ville>Tours</ville>
+            </addresse_principale>
+            <donnation>10000000</donnation>
+        </donnateur>
+    </membres>
+    <adherentCount>7</adherentCount>
+    <address identifiant="3">
+        <Ligne>Rue du stade</Ligne>
+        <code_postal>37250</code_postal>
+        <ville>Veigné</ville>
+    </address>
+</association_sportive>
