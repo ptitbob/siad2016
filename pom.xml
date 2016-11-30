@@ -17,6 +17,7 @@
         <module>91-data</module>
         <module>85-insee-service</module>
         <module>86-insee-app</module>
+        <module>20-jaxws-td1</module>
     </modules>
 
     <properties>
@@ -92,6 +93,11 @@
             <dependency>
                 <groupId>org.wildfly.swarm</groupId>
                 <artifactId>logging</artifactId>
+                <version>${wildfly.swarm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wildfly.swarm</groupId>
+                <artifactId>webservices</artifactId>
                 <version>${wildfly.swarm.version}</version>
             </dependency>
             <!-- postgres -->
