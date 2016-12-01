@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+    wildfly:
+        build:
+            context: .
+        image: shipstone/siad2016-wildfly
+        container_name: siad2016-wildfly
+        ports:
+            - 8080:8080
+            - 9990:9990
+            - 8787:8787
