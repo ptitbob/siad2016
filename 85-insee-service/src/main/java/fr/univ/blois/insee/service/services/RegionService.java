@@ -72,7 +72,7 @@ public class RegionService {
     Region region = getRegionByInseeId(inseeId);
     region.setName(name);
     region.setUpperName(upperName);
-    region.setChefLieuId(chefLieuId);
+    //region.setChefLieuId(chefLieuId);
     entityManager.merge(region);
   }
 

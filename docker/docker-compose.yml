@@ -6,16 +6,22 @@ services:
   postgres:
     build:
       context: postgres/.
-    image: shipstone/postgres-siad2016
-    container_name: postgres-db-siad2016
+    image: shipstone/siad2016-postgres
+    container_name: siad2016-postgres-db
     ports:
       - 5432:5432
-  pgAdmin4:
-    build:
-      context: pgadmin/.
-    image: shipstone/pgadmin4-siad2016
-    container_name: pgAdmin4-siad2016
-    ports:
-      - 5050:5050
+  #pgAdmin4:
+  #  build:
+  #    context: pgadmin/.
+  #  image: shipstone/pgadmin4-siad2016
+  #  container_name: pgAdmin4-siad2016
+  #  ports:
+  #    - 5050:5050
+  #  links:
+  #    - postgres
+  wildfly:
+    extends: 
+      file: wildfly/docker-compose.wildfly.yml
+      service: wildfly
     links:
       - postgres

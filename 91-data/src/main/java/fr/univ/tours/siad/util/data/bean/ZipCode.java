@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import java.io.Serializable;
 import java.util.Objects;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -15,7 +16,9 @@ import static javax.persistence.GenerationType.SEQUENCE;
  */
 @Entity
 @SequenceGenerator(name = "zipcode_sequence", sequenceName = "zipcode_sequence", allocationSize = 1)
-public class ZipCode {
+public class ZipCode implements Serializable {
+
+    private static final long serialVersionUID = 6020066195764201899L;
 
     public static final String ZIPCODE_ID = "ID";
 
