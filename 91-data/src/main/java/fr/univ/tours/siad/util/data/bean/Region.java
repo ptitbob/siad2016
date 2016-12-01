@@ -26,8 +26,11 @@ import static javax.persistence.FetchType.LAZY;
 @Table(name = "region")
 @SequenceGenerator(name = "region_sequence", sequenceName = "region_sequence", allocationSize = 1)
 @NamedQueries({
+    // Renvoi toutes les régions
     @NamedQuery(name = Region.FIND_ALL, query = "select r from Region r")
+    // Renvoi le nombre de region
     , @NamedQuery(name = Region.COUNT, query = "select count(r) from Region r")
+    // Renvoi une région selon le n° INSEE de celle-ci
     , @NamedQuery(name = Region.FIND_BY_INSEEID, query = "select r from Region r where r.inseeId = :" + Region.INSEEID)
 })
 public class Region {
