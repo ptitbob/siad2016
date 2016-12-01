@@ -5,8 +5,17 @@ version: '2'
 services:
   postgres:
     build:
-      context: ./postgre
+      context: postgres/.
     image: shipstone/postgres-siad2016
     container_name: postgres-db-siad2016
     ports:
       - 5432:5432
+  pgAdmin4:
+    build:
+      context: pgadmin/.
+    image: shipstone/pgadmin4-siad2016
+    container_name: pgAdmin4-siad2016
+    ports:
+      - 5050:5050
+    links:
+      - postgres
