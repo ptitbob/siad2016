@@ -1,0 +1,12 @@
+# Initialisation de la base de cours pour SIAD/M2 - 2016/2017
+
+version: '2'
+
+services:
+  postgres:
+    build:
+      context: postgres/.
+    image: shipstone/siad2016-postgres
+    container_name: siad2016-postgres-db
+    ports:
+      - 5432:5432
