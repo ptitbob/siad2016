@@ -14,6 +14,7 @@
         <module>20-jaxb-td1</module>
         <module>20-jaxb-td1-soluce</module>
         <module>30-jaxws-td1</module>
+        <module>30-jaxws-td1-soluce</module>
         <module>90-util</module>
         <module>91-data</module>
         <module>85-insee-service</module>
