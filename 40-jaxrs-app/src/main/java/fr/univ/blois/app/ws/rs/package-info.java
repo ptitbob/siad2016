@@ -1,4 +1,4 @@
 /**
  * @author François Robert
  */
-package fr.univ.tours.siad.util.app;
+package fr.univ.blois.app.ws.rs;
