@@ -15,7 +15,7 @@ public class Address {
     /**
      * Identifiant
      */
-    @XmlAttribute(name = "identifiant")
+    @XmlAttribute(name = "identifiant1")
     public Long id;
 
     /**

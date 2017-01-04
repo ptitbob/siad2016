@@ -83,7 +83,7 @@ public class RegionService {
    * @throws NoRegionFoundException Si la region n'a pas été trouvé
    */
   public Region removeRegionById(String inseeId) throws NoRegionFoundException {
-    Region region = getRegionByInseeId(inseeId); // cette méthode DOIT renvoyer une exception. Il n'est pas utilse de la catcher ici - cela peut être important qu'une deletion leve une exception
+    Region region = getRegionByInseeId(inseeId); // cette méthode DOIT renvoyer une exception. Il n'est pas utile de la catcher ici - cela peut être important qu'une deletion leve une exception
     entityManager.remove(region);
     return region;
   }
