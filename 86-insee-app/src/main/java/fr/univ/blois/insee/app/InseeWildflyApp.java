@@ -56,7 +56,7 @@ public class InseeWildflyApp {
         })
     );
     containerSwarm.fraction(
-        new JPAFraction().defaultDatasource("java:jboss/datasources/SiadDS")
+        new JPAFraction().defaultDatasource("java:jdbc/datasources/SiadDS")
     );
     return "org.postgresql";
   }

@@ -16,8 +16,9 @@
         <module>30-jaxws-td1</module>
         <module>90-util</module>
         <module>91-data</module>
-        <module>85-insee-service</module>
-        <module>86-insee-app</module>
+        <module>85-fr.univ.blois.insee-service</module>
+        <module>86-fr.univ.blois.insee-app</module>
+        <module>40-jaxrs</module>
     </modules>
 
     <properties>

@@ -6,54 +6,26 @@
         <artifactId>siad</artifactId>
         <groupId>fr.univ.blois</groupId>
         <version>2016.1</version>
-        <relativePath>..</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>40-jaxrs</artifactId>
     <packaging>war</packaging>
-
-    <artifactId>fr.univ.blois.insee-app</artifactId>
-
-    <properties>
-        <postgresql.version>9.4.1207</postgresql.version>
-    </properties>
 
     <dependencies>
         <dependency>
             <groupId>fr.univ.blois</groupId>
-            <artifactId>fr.univ.blois.insee-service</artifactId>
+            <artifactId>data</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- dependances externe -->
+        <!-- API JavaEE profile web -->
         <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>microprofile</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>jpa</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.wildfly.swarm</groupId>
-                    <artifactId>h2</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>datasources</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>ejb</artifactId>
-        </dependency>
-        <dependency>
-            <!-- dépendance spécifique postgres afin de referencer le driver postgresql -->
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>postgresql</artifactId>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
         </dependency>
     </dependencies>
-
     <build>
+        <finalName>siad</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
