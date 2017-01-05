@@ -1,9 +1,7 @@
 package fr.univ.blois.insee.app;
 
 import fr.univ.blois.insee.service.InseeApplication;
-import fr.univ.tours.siad.util.Util;
 import fr.univ.tours.siad.util.data.Data;
-import org.apache.logging.log4j.Logger;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.wildfly.swarm.Swarm;
@@ -23,7 +21,7 @@ public class InseeWildflyApp {
       String driverModule = intializeDatabaseFraction(containerSwarm);
       JAXRSArchive deploymentArchive = ShrinkWrap.create(JAXRSArchive.class);
       deploymentArchive.addModule(driverModule);
-      deploymentArchive.addPackages(true, InseeApplication.class.getPackage(), Data.class.getPackage(), Util.class.getPackage(), Logger.class.getPackage());
+      deploymentArchive.addPackages(true, InseeApplication.class.getPackage(), Data.class.getPackage());
       deploymentArchive.addAsWebInfResource(new ClassLoaderAsset("META-INF/persistence.xml", Data.class.getClassLoader()), "classes/META-INF/persistence.xml");
 
       // Lancement du serveur
