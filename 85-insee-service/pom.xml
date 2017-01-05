@@ -15,11 +15,6 @@
     <dependencies>
         <dependency>
             <groupId>fr.univ.blois</groupId>
-            <artifactId>util</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>fr.univ.blois</groupId>
             <artifactId>data</artifactId>
             <version>${project.version}</version>
         </dependency>

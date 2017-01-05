@@ -23,11 +23,6 @@
             <artifactId>insee-service</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>fr.univ.blois</groupId>
-            <artifactId>util</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <!-- dependances externe -->
         <dependency>
             <groupId>org.wildfly.swarm</groupId>
@@ -50,18 +45,6 @@
         <dependency>
             <groupId>org.wildfly.swarm</groupId>
             <artifactId>ejb</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>logging</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
         </dependency>
         <dependency>
             <!-- dépendance spécifique postgres afin de referencer le driver postgresql -->

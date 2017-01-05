@@ -21,26 +21,10 @@ public class InseeWildflyApp {
     try {
       Swarm containerSwarm = new Swarm();
       String driverModule = intializeDatabaseFraction(containerSwarm);
-      /*
-      String logFile = "swarm.log";
-      containerSwarm.fraction(
-          new LoggingFraction()
-              .fileHandler("FILE", f -> {
-
-                Map<String, String> fileProps = new HashMap<>();
-                fileProps.put("path", logFile);
-                f.file(fileProps);
-                f.level(Level.INFO);
-                f.formatter("%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n");
-
-              })
-              .rootLogger(Level.INFO, "FILE"));
-*/
       JAXRSArchive deploymentArchive = ShrinkWrap.create(JAXRSArchive.class);
       deploymentArchive.addModule(driverModule);
       deploymentArchive.addPackages(true, InseeApplication.class.getPackage(), Data.class.getPackage(), Util.class.getPackage(), Logger.class.getPackage());
       deploymentArchive.addAsWebInfResource(new ClassLoaderAsset("META-INF/persistence.xml", Data.class.getClassLoader()), "classes/META-INF/persistence.xml");
-
 
       // Lancement du serveur
       containerSwarm.start();
