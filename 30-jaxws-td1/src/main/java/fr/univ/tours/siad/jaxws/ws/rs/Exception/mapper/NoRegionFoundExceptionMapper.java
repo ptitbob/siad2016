@@ -1,6 +1,6 @@
 package fr.univ.tours.siad.jaxws.ws.rs.Exception.mapper;
 
-import fr.univ.blois.insee.service.services.exception.NoRegionFoundException;
+import fr.univ.tours.siad.jaxws.services.exception.NoRegionFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;

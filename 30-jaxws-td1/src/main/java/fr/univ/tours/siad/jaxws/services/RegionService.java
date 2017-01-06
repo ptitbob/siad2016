@@ -1,6 +1,6 @@
 package fr.univ.tours.siad.jaxws.services;
 
-import fr.univ.blois.insee.service.services.exception.NoRegionFoundException;
+import fr.univ.tours.siad.jaxws.services.exception.NoRegionFoundException;
 import fr.univ.tours.siad.util.data.bean.Region;
 
 import javax.ejb.Stateless;

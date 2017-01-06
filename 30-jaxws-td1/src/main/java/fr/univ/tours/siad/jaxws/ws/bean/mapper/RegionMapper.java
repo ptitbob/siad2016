@@ -1,7 +1,7 @@
 package fr.univ.tours.siad.jaxws.ws.bean.mapper;
 
-import fr.univ.blois.insee.service.ws.bean.RegionDetailDto;
-import fr.univ.blois.insee.service.ws.bean.RegionDto;
+import fr.univ.tours.siad.jaxws.ws.bean.RegionDetailDto;
+import fr.univ.tours.siad.jaxws.ws.bean.RegionDto;
 import fr.univ.tours.siad.util.data.bean.Region;
 
 import java.util.stream.Collectors;

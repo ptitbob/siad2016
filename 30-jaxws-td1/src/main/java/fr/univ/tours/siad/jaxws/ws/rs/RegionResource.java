@@ -1,14 +1,14 @@
 package fr.univ.tours.siad.jaxws.ws.rs;
 
-import fr.univ.blois.insee.service.services.DistrictService;
-import fr.univ.blois.insee.service.services.RegionService;
-import fr.univ.blois.insee.service.services.exception.NoRegionFoundException;
-import fr.univ.blois.insee.service.ws.bean.DistrictDto;
-import fr.univ.blois.insee.service.ws.bean.RegionDetailDto;
-import fr.univ.blois.insee.service.ws.bean.RegionDto;
-import fr.univ.blois.insee.service.ws.bean.mapper.DistrictMapper;
-import fr.univ.blois.insee.service.ws.bean.mapper.RegionMapper;
-import fr.univ.blois.insee.service.ws.rs.Exception.IllegalInseeIdPresentationException;
+import fr.univ.tours.siad.jaxws.services.DistrictService;
+import fr.univ.tours.siad.jaxws.services.RegionService;
+import fr.univ.tours.siad.jaxws.services.exception.NoRegionFoundException;
+import fr.univ.tours.siad.jaxws.ws.bean.DistrictDto;
+import fr.univ.tours.siad.jaxws.ws.bean.RegionDetailDto;
+import fr.univ.tours.siad.jaxws.ws.bean.RegionDto;
+import fr.univ.tours.siad.jaxws.ws.bean.mapper.DistrictMapper;
+import fr.univ.tours.siad.jaxws.ws.bean.mapper.RegionMapper;
+import fr.univ.tours.siad.jaxws.ws.rs.Exception.IllegalInseeIdPresentationException;
 import fr.univ.tours.siad.util.data.bean.District;
 import fr.univ.tours.siad.util.data.bean.Region;
 
