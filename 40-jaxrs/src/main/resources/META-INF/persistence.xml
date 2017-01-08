@@ -3,8 +3,6 @@
   <persistence-unit name="siad" transaction-type="JTA">
     <jta-data-source>jdbc/datasources/SiadDS</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties>
-      <property name="javax.persistence.schema-generation.database.action" value="none"/>
-    </properties>
+    <properties/>
   </persistence-unit>
 </persistence>
