@@ -32,7 +32,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>40-jaxrs</finalName>
+        <finalName>siad</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
