@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import java.util.Objects;
 import java.util.Set;
 
-import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.FetchType.EAGER;
 
 @Entity
 @Table(name = "region")
@@ -75,7 +75,7 @@ public class Region {
   /**
    * Liste des départements
    */
-  @OneToMany(fetch = LAZY, mappedBy = "region")
+  @OneToMany(fetch = EAGER, mappedBy = "region")
   private Set<District> districtSet;
 
   /**
