@@ -29,6 +29,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
         , @NamedQuery(name = City.FIND_ALL, query = "select c from City c")
         , @NamedQuery(name = City.ELEVATION_SUM_BY_DISTRICT, query = "select sum(c.elevation) from City c where c.district.inseeId = :" + District.INSEEID)
         , @NamedQuery(name = City.FIND_BY_DISTRICT, query = "select c from City c where c.district.inseeId = :" + District.INSEEID)
+        , @NamedQuery(name = City.FIND_BY_REGION, query = "select c from City c where c.region.inseeId = :" + Region.INSEEID)
         , @NamedQuery(name = City.FIND_CITY_BY_STATUS_FOR_DISTRICT, query = "select c from City c where c.district.inseeId = :" + District.INSEEID + " and c.cityStatus.label = :" + CityStatus.CITY_LABEL)
         , @NamedQuery(name = City.FIND_BY_INSEE, query = "select c from City c where c.inseeId = :" + City.INSEEID)
 })
@@ -64,6 +65,10 @@ public class City implements Serializable {
 
     public static final String CITY_ID = "id";
     public static final String INSEEID = "CITY_INSEEID";
+    /**
+     * Renvoi la liste des ville d'une région
+     */
+    public static final String FIND_BY_REGION = "City.FIND_BY_REGION";
 
     /**
      * Identifiant (PK)

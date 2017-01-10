@@ -15,6 +15,7 @@ import fr.univ.blois.insee.ws.rs.Exception.IllegalInseeIdPresentationException;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -22,12 +23,14 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,17 +72,29 @@ public class RegionResource implements RegionMapper, DistrictMapper {
   /**
    * Renvoi la liste des département d'une région
    * @param regionInseeId n° INSEE de la région
+   * @param districtId n° INSEE du département (REST)
    * @return liste des départements
    * @throws NoRegionFoundException si la région n'existe pas
    */
   @GET
   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
   @Path("/{id:[A-Z0-9]{2}}/departements")
-  public List<DistrictDto> getDistrictListForRegion(@PathParam("id") String regionInseeId) throws NoRegionFoundException {
+  public List<DistrictDto> getDistrictListForRegion(
+      @PathParam("id") String regionInseeId,
+      @QueryParam("departementInsee") @DefaultValue("N/A") String districtId
+  ) throws NoRegionFoundException {
     // robert-f : j'ai volontairement decouper le code, il est possible de tout faire en une seule ligne de code.
     Region region = regionService.getRegionByInseeId(regionInseeId);
-    List<District> districtList = districtService.getDistrictListForRegion(regionInseeId);
-    List<DistrictDto> districtDtoList = districtList.stream().map(this :: getDistrictDto).collect(Collectors.toList());
+    List<DistrictDto> districtDtoList;
+    if ("N/A".equals(districtId)) {
+      districtDtoList = region.getDistrictSet()
+          .stream().map(this :: getDistrictDto).collect(Collectors.toList());
+    } else {
+      districtDtoList = region
+          .getDistrictSet().stream()
+          .filter(district -> district.getInseeId().equals(districtId))
+          .map(this :: getDistrictDto).collect(Collectors.toList());
+    }
     return districtDtoList;
   }
 
