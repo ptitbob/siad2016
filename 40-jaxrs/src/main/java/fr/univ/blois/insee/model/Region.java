@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import java.util.Objects;
 import java.util.Set;
 
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
@@ -27,6 +28,8 @@ import static javax.persistence.FetchType.LAZY;
     , @NamedQuery(name = Region.COUNT, query = "select count(r) from Region r")
     // Renvoi une région selon le n° INSEE de celle-ci
     , @NamedQuery(name = Region.FIND_BY_INSEEID, query = "select r from Region r where r.inseeId = :" + Region.INSEEID)
+    // Renvoi les nom de régions
+    , @NamedQuery(name = Region.GET_ALL_NAME, query = "select r.upperName from Region r")
 })
 public class Region {
 
@@ -41,6 +44,7 @@ public class Region {
 
   public static final String INSEEID = "regionInseeId";
   public static final String FIND_BY_INSEEID = "Region.FIND_BY_INSEEID";
+  public static final String GET_ALL_NAME = "Region.GET_ALL_NAME";
 
   /**
    * Identifiant (PK)
@@ -75,7 +79,7 @@ public class Region {
   /**
    * Liste des départements
    */
-  @OneToMany(fetch = LAZY, mappedBy = "region")
+  @OneToMany(fetch = EAGER, mappedBy = "region")
   private Set<District> districtSet;
 
   /**

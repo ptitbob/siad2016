@@ -1,14 +1,18 @@
 package fr.univ.blois.insee.ws.bean;
 
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
 
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+
 /**
  * @author François Robert
  */
 @XmlRootElement
+@XmlAccessorType(FIELD)
 public class RegionDetailDto extends RegionDto {
 
   private String name;

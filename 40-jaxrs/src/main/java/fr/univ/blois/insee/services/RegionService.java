@@ -25,6 +25,15 @@ public class RegionService {
   }
 
   /**
+   * renvoi la liste des nom de région
+   * @return liste de nom
+   */
+  public List<String> getReginNameList() {
+    return entityManager.createNamedQuery(Region.GET_ALL_NAME, String.class)
+        .getResultList();
+  }
+
+  /**
    * Renvoi la region en fonction de son numero INSEE
    * @param regionInseeId numero INSEE
    * @return region
