@@ -18,83 +18,85 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @SequenceGenerator(name = "zipcode_sequence", sequenceName = "zipcode_sequence", allocationSize = 1)
 public class ZipCode implements Serializable {
 
-    private static final long serialVersionUID = 6020066195764201899L;
+  private static final long serialVersionUID = 6020066195764201899L;
 
-    public static final String ZIPCODE_ID = "ID";
+  public static final String ZIPCODE_ID = "ID";
+  public static final String ZIPCODE = "zipcode_value";
 
-    /**
-     * Identifiant (PK)
-     */
-    @Id @GeneratedValue(strategy = SEQUENCE, generator = "zipcode_sequence")
-    @Column(name = ZIPCODE_ID)
-    private Long id;
+  /**
+   * Identifiant (PK)
+   */
+  @Id
+  @GeneratedValue(strategy = SEQUENCE, generator = "zipcode_sequence")
+  @Column(name = ZIPCODE_ID)
+  private Long id;
 
-    /**
-     * Code postal
-     */
-    @Column(length = 6)
-    private String zipCode;
+  /**
+   * Code postal
+   */
+  @Column(length = 6)
+  private String zipCode;
 
-    /**
-     * ville
-     */
-    @ManyToOne
-    private City city;
+  /**
+   * ville
+   */
+  @ManyToOne
+  private City city;
 
-    /**
-     * constructeur
-     */
-    public ZipCode() {
-    }
+  /**
+   * constructeur
+   */
+  public ZipCode() {
+  }
 
-    public ZipCode(City city, String zipCode) {
-        this.city = city;
-        this.zipCode = zipCode;
-    }
+  public ZipCode(City city, String zipCode) {
+    this.city = city;
+    this.zipCode = zipCode;
+  }
 
-    public City getCity() {
-        return city;
-    }
+  public City getCity() {
+    return city;
+  }
 
-    public void setCity(City city) {
-        this.city = city;
-    }
+  public void setCity(City city) {
+    this.city = city;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public String getZipCode() {
-        return zipCode;
-    }
+  public String getZipCode() {
+    return zipCode;
+  }
 
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
+  public void setZipCode(String zipCode) {
+    this.zipCode = zipCode;
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ZipCode)) return false;
-        ZipCode zipCode1 = (ZipCode) o;
-        return Objects.equals(zipCode, zipCode1.zipCode) &&
-                Objects.equals(city, zipCode1.city);
-    }
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof ZipCode)) return false;
+    ZipCode zipCode1 = (ZipCode) o;
+    return Objects.equals(zipCode, zipCode1.zipCode) &&
+        Objects.equals(city, zipCode1.city);
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(zipCode, city);
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(zipCode, city);
+  }
 
-    @Override
-    public String toString() {
-        return "ZipCode{" +
-                "zipCode='" + zipCode + '\'' +
-                ", id=" + id +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "ZipCode{" +
+        "zipCode='" + zipCode + '\'' +
+        ", id=" + id +
+        '}';
+  }
 }
