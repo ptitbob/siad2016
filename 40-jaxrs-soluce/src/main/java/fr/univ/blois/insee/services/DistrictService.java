@@ -2,9 +2,13 @@ package fr.univ.blois.insee.services;
 
 import fr.univ.blois.insee.model.District;
 import fr.univ.blois.insee.model.Region;
+import fr.univ.blois.insee.services.exception.NoDsitrictFoundException;
+import fr.univ.blois.insee.ws.bean.DistrictDto;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -28,4 +32,28 @@ public class DistrictService {
         .getResultList();
   }
 
+  /**
+   * Renvoi la liste de tous les département
+   * @return liste
+   */
+  public List<District> getDistrictList() {
+    return entityManager.createNamedQuery(District.FIND_ALL, District.class)
+        .getResultList();
+  }
+
+  /**
+   * Renvoi le département via son numéro INSEE
+   * @param inseeId n° INSEE
+   * @return département
+   * @throws NoDsitrictFoundException Erreur si le département n'a pu être localisé
+   */
+  public District getDistrictbyInsee(String inseeId) throws NoDsitrictFoundException {
+    try {
+      return entityManager.createNamedQuery(District.FIND_BY_INSEEID, District.class)
+          .setParameter(District.INSEEID, inseeId)
+          .getSingleResult();
+    } catch (NoResultException | NonUniqueResultException e) {
+      throw new NoDsitrictFoundException("le département " + inseeId + " n'a pu être localisé");
+    }
+  }
 }
