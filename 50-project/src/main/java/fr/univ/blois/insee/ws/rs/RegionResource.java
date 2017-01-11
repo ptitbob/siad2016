@@ -11,7 +11,6 @@ import fr.univ.blois.insee.ws.bean.RegionDto;
 import fr.univ.blois.insee.ws.bean.mapper.DistrictMapper;
 import fr.univ.blois.insee.ws.bean.mapper.RegionMapper;
 import fr.univ.blois.insee.ws.rs.Exception.IllegalInseeIdPresentationException;
-import fr.univ.blois.insee.ws.rs.provider.SiadMediaType;
 
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -54,17 +53,7 @@ public class RegionResource implements RegionMapper, DistrictMapper {
   @GET
   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
   public List<RegionDto> getRegionList() {
-    return regionService.getRegionList()
-        .stream()
-        .map(this :: getRegionDto)
-        .collect(Collectors.toList());
-  }
-
-  @GET
-  @Path("/names")
-  @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-  public List<String> getRegionNameList() {
-    return regionService.getReginNameList();
+    return regionService.getRegionList().stream().map(this :: getRegionDto).collect(Collectors.toList());
   }
 
   /**
@@ -74,7 +63,7 @@ public class RegionResource implements RegionMapper, DistrictMapper {
    * @throws NoRegionFoundException si la région n'est pas localisé
    */
   @GET
-  @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, SiadMediaType.SIAD_FORMATTED})
+  @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
   @Path("/{id:[A-Z0-9]{2}}") // utilisation d'une regex
   public RegionDetailDto getRegionByInseeId(@PathParam("id") String regionInseeId) throws NoRegionFoundException {
     return getRegionDetailDto(regionService.getRegionByInseeId(regionInseeId));

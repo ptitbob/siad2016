@@ -18,6 +18,7 @@
         <module>40-jaxrs</module>
         <module>90-util</module>
         <module>91-data</module>
+        <module>50-project</module>
     </modules>
 
     <properties>
