@@ -10,7 +10,7 @@ public interface CityStatusMapper {
 
   default CityStatusDto getCityStatusDto(CityStatus cityStatus) {
     CityStatusDto cityStatusDto = new CityStatusDto();
-    cityStatusDto.setStatus(cityStatus.getLabel());
+    cityStatusDto.setStatus(cityStatus == null ? "N/A" : cityStatus.getLabel());
     return cityStatusDto;
   }
 }

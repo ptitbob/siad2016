@@ -12,6 +12,11 @@ import java.util.stream.Collectors;
  */
 public interface CityMapper extends ZipCodeMapper, CityStatusMapper {
 
+  /**
+   * Renvoi les détails d'une ville (DTO)
+   * @param city ville
+   * @return détails d'une ville (DTO)
+   */
   default CityDetailDto getCityDetailDto(City city) {
     CityDetailDto cityDetailDto = new CityDetailDto();
     cityDetailDto.setId(city.getId());
@@ -27,5 +32,14 @@ public interface CityMapper extends ZipCodeMapper, CityStatusMapper {
         .collect(Collectors.toList())
     );
     return cityDetailDto;
+  }
+
+  default CityDto getCityDto(City city) {
+    CityDto cityDto = new CityDto();
+    cityDto.setId(city.getId());
+    cityDto.setInseeId(city.getInseeId());
+    cityDto.setName(city.getName());
+    cityDto.setCityStatus(getCityStatusDto(city.getCityStatus()));
+    return cityDto;
   }
 }
