@@ -11,7 +11,16 @@ import javax.ws.rs.QueryParam;
 @Path("bonjour")
 public class FriendlyResource {
 
+  /**
+   * Valeur par défaut attendu dans un requete
+   */
   private static final String DEFAULT_QUERY_PARAM_VALUE = "&ToTo";
+
+  /**
+   * Methode renvoyant bonjour le monde si aucun paramètre n'est passé, sinon dit bonjour au nom passé en paramètre
+   * @param who nom à qui dir bonjour
+   * @return phrase disant bonjour le monde ou disant bonjour à qui ;)
+   */
   @GET
   @Path("lemonde")
   public String sayHelloToTheWorld(@QueryParam("qui") @DefaultValue(DEFAULT_QUERY_PARAM_VALUE) String who) {
