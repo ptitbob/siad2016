@@ -11,7 +11,7 @@ import javax.persistence.SequenceGenerator;
 import java.io.Serializable;
 import java.util.Objects;
 
-import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 /**
@@ -67,7 +67,7 @@ public class District implements Serializable {
     /**
      * Région
      */
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = EAGER)
     private Region region;
 
     /**
