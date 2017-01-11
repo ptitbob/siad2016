@@ -121,7 +121,7 @@ public class City implements Serializable {
     /**
      * Liste des codes de la ville
      */
-    @OneToMany(mappedBy = "city", fetch = LAZY)
+    @OneToMany(mappedBy = "city", fetch = EAGER)
     private Set<ZipCode> zipCodeSet;
 
     /**
