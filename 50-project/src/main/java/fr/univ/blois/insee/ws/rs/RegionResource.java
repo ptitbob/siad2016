@@ -1,6 +1,5 @@
 package fr.univ.blois.insee.ws.rs;
 
-import fr.univ.blois.insee.model.District;
 import fr.univ.blois.insee.model.Region;
 import fr.univ.blois.insee.services.DistrictService;
 import fr.univ.blois.insee.services.RegionService;
@@ -30,7 +29,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

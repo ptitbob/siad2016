@@ -80,9 +80,9 @@ public class Person implements Serializable {
     /**
      * Adresse
      */
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = ADDRESS_FK, referencedColumnName = fr.univ.blois.insee.model.Address.ADDRESS_ID)
-    private fr.univ.blois.insee.model.Address address;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = ADDRESS_FK, referencedColumnName = Address.ADDRESS_ID)
+    private Address address;
 
     /**
      * Constructeur
@@ -134,11 +134,11 @@ public class Person implements Serializable {
         this.surname = surname;
     }
 
-    public fr.univ.blois.insee.model.Address getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(fr.univ.blois.insee.model.Address address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 

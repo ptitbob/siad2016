@@ -53,14 +53,14 @@ public class Address implements Serializable {
     /**
      * Ville
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = CITY_FK, referencedColumnName = City.CITY_ID)
     private City city;
 
     /**
      * Code postal
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = ZIPCODE_FK, referencedColumnName = ZipCode.ZIPCODE_ID)
     private ZipCode zipCode;
 

@@ -32,6 +32,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
         , @NamedQuery(name = City.FIND_BY_REGION, query = "select c from City c where c.region.inseeId = :" + Region.INSEEID)
         , @NamedQuery(name = City.FIND_CITY_BY_STATUS_FOR_DISTRICT, query = "select c from City c where c.district.inseeId = :" + District.INSEEID + " and c.cityStatus.label = :" + CityStatus.CITY_LABEL)
         , @NamedQuery(name = City.FIND_BY_INSEE, query = "select c from City c where c.inseeId = :" + City.INSEEID)
+        , @NamedQuery(name = City.GET_BY_ZIPCODE, query = "select z.city from ZipCode z where z.zipCode = :" + ZipCode.ZIPCODE)
 })
 public class City implements Serializable {
 
@@ -69,6 +70,10 @@ public class City implements Serializable {
      * Renvoi la liste des ville d'une région
      */
     public static final String FIND_BY_REGION = "City.FIND_BY_REGION";
+    /**
+     * Renvoi une ville selon son code postal
+     */
+    public static final String GET_BY_ZIPCODE = "City.GET_BY_ZIPCODE";
 
     /**
      * Identifiant (PK)
@@ -116,7 +121,7 @@ public class City implements Serializable {
     /**
      * Liste des codes de la ville
      */
-    @OneToMany(mappedBy = "city", fetch = LAZY)
+    @OneToMany(mappedBy = "city", fetch = EAGER)
     private Set<ZipCode> zipCodeSet;
 
     /**
