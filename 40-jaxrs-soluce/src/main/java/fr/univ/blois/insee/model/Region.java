@@ -140,13 +140,12 @@ public class Region {
     if (this == o) return true;
     if (!(o instanceof Region)) return false;
     Region region = (Region) o;
-    return Objects.equals(id, region.id) &&
-        Objects.equals(inseeId, region.inseeId);
+    return Objects.equals(inseeId, region.inseeId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, inseeId);
+    return Objects.hash(inseeId);
   }
 
   @Override
