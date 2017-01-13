@@ -42,6 +42,8 @@ import java.util.stream.Collectors;
 public class CityResource implements CityMapper {
 
   private static final String DEFAULT_QUERY_VALUE = "&ToTo";
+  public static final String NON_VALUE = "NON";
+  public static final String OUI_VALUE = "OUI";
 
   @EJB
   private CityService cityService;
@@ -64,9 +66,21 @@ public class CityResource implements CityMapper {
   public List<CityDto> getCityList(
       @QueryParam("region") @DefaultValue(DEFAULT_QUERY_VALUE) String regionInsee
       , @QueryParam("departement") @DefaultValue(DEFAULT_QUERY_VALUE) String districtInsee
-  ) {
+      , @QueryParam("chef-lieu") @DefaultValue(NON_VALUE) String onlyMainCity
+  ) throws NoRegionFoundException, NoCityFoundException, NoDsitrictFoundException {
     List<City> cityList;
-    if (!DEFAULT_QUERY_VALUE.equals(regionInsee)) {
+    boolean mainCity = OUI_VALUE.equals(onlyMainCity);
+    if (mainCity) {
+      List<CityDto> cityDtoList = new ArrayList<>();
+      if (!DEFAULT_QUERY_VALUE.equals(regionInsee)) {
+        Region region = regionService.getRegionByInseeId(regionInsee);
+        cityDtoList.add(getCityDto(region.getChefLieu()));
+      } else if (!DEFAULT_QUERY_VALUE.equals(districtInsee)) {
+        District district = districtService.getDistrictbyInsee(districtInsee);
+        cityDtoList.add(getCityDto(cityService.getCityByInsee(district.getChefLieuId())));
+      }
+      return cityDtoList;
+    } else  if (!DEFAULT_QUERY_VALUE.equals(regionInsee)) {
       cityList = cityService.getRegionCityList(regionInsee);
     } else if (!DEFAULT_QUERY_VALUE.equals(districtInsee)) {
       cityList = cityService.getDistrictCityList(districtInsee);
