@@ -28,7 +28,12 @@ public class FriendlyResource {
   @Path("lemonde")
   public String sayHelloToTheWorld(
       @QueryParam("qui") @DefaultValue(DEFAULT_QUERY_PARAM_VALUE) String who) {
-    return "Bonjour " + (DEFAULT_QUERY_PARAM_VALUE.equals(who) ? "le monde" : who);
+    if (DEFAULT_QUERY_PARAM_VALUE.equals(who)) {
+      return "Bonjour le monde";
+    } else {
+      return "Bonjour " + who + ", comment allez vous aujourd'hui ?";
+    }
+    //return "Bonjour " + (DEFAULT_QUERY_PARAM_VALUE.equals(who) ? "le monde" : who);
   }
 
 }
