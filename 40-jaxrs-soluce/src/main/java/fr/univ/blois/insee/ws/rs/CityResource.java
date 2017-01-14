@@ -20,6 +20,8 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotAllowedException;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -60,16 +62,20 @@ public class CityResource implements CityMapper {
    *
    * @param regionInsee   n° INSEE de la région (prioritaire)
    * @param districtInsee n° INSEE du département
+   * @param onlyMainCity renvoyer le chef lieu de la région ou du département si la région ou le département n'a pas été fourni, on renvoi une liste vide
    * @return liste
+   * @throws NoRegionFoundException si la région de demandé n'a pas été localisé
+   * @throws NoCityFoundException Si la ville demandé n'a pas été demandé
+   * @throws NoDsitrictFoundException si la ville n'a pas localisé (chef lieu)
    */
   @GET
   public List<CityDto> getCityList(
       @QueryParam("region") @DefaultValue(DEFAULT_QUERY_VALUE) String regionInsee
       , @QueryParam("departement") @DefaultValue(DEFAULT_QUERY_VALUE) String districtInsee
-      , @QueryParam("chef-lieu") @DefaultValue(NON_VALUE) String onlyMainCity
+      , @QueryParam("cheflieu") @DefaultValue(NON_VALUE) String onlyMainCity
   ) throws NoRegionFoundException, NoCityFoundException, NoDsitrictFoundException {
     List<City> cityList;
-    boolean mainCity = OUI_VALUE.equals(onlyMainCity);
+    boolean mainCity = OUI_VALUE.equals(onlyMainCity.toUpperCase());
     if (mainCity) {
       List<CityDto> cityDtoList = new ArrayList<>();
       if (!DEFAULT_QUERY_VALUE.equals(regionInsee)) {
