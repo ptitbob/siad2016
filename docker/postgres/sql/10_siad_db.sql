@@ -59,7 +59,7 @@ CREATE TABLE "person" (
     "firstname" character varying(100),
     "reference" character varying(7),
     "surname" character varying(100),
-    "ADDRESS_FK" BIGINT
+    "address_fk" BIGINT
 );
 
 
