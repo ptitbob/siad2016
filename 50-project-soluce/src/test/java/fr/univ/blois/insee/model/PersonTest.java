@@ -15,13 +15,15 @@ public class PersonTest extends JpaTest {
     person.setFirstname("toto");
     person.setReference("AAAA");
     person = persist(person);
-    /*
-    Address address = new Address("line", "zipcode", "city");
+    Address address = new Address();
+    address.setLine1("line for test");
     persist(address);
-    Assert.assertEquals(new Long(1), person.getId());
-    person = new Person("login", "surname", "firstname");
-    person = persist(person);
-    */
+    person.setAddress(address);
+    merge(person);
+    entityManager.detach(person);
+    Person personAfterMerging = entityManager.find(Person.class, person.getId());
+    Assert.assertNotSame(person, personAfterMerging);
+    Assert.assertNotNull(personAfterMerging.getAddress());
   }
 
 }
