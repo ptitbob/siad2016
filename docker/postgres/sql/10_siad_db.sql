@@ -108,4 +108,26 @@ CREATE SEQUENCE "zipcode_sequence"
     NO MAXVALUE
     CACHE 1;
 
+CREATE TABLE address
+(
+    address_id BIGINT NOT NULL,
+    floor INTEGER,
+    line1 VARCHAR(100),
+    line2 VARCHAR(100),
+    city_fk BIGINT,
+    zipcode_fk BIGINT,
+    CONSTRAINT fk_address_city_fk FOREIGN KEY (city_fk) REFERENCES city (id),
+    CONSTRAINT fk_address_zipcode_fk FOREIGN KEY (zipcode_fk) REFERENCES zipcode (id)
+);
+
+ALTER TABLE ONLY "address"
+    ADD CONSTRAINT "PK_address_id" PRIMARY KEY ("address_id");
+
+CREATE SEQUENCE "address_sequence"
+START WITH 1
+INCREMENT BY 1
+NO MINVALUE
+NO MAXVALUE
+CACHE 1;
+
 commit;
