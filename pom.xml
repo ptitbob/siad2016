@@ -20,6 +20,7 @@
         <module>90-util</module>
         <module>91-data</module>
         <module>50-project</module>
+        <module>50-project-soluce</module>
     </modules>
 
     <properties>
