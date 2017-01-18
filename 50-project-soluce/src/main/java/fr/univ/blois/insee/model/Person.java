@@ -90,6 +90,13 @@ public class Person implements Serializable {
     public Person() {
     }
 
+    public Person(String firstname, String surname, Date birth) {
+        this();
+        setFirstname(firstname);
+        setSurname(surname);
+        setBirth(birth);
+    }
+
     public Long getId() {
         return id;
     }

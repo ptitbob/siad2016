@@ -9,9 +9,6 @@ import fr.univ.blois.insee.ws.bean.PersonDto;
 public interface PersonMapper {
 
   default PersonDto getPersonDto(Person person){
-    PersonDto personDto = new PersonDto();
-    personDto.setId(person.getId());
-    personDto.setName(person.getFirstname() + " " + person.getSurname());
-    return personDto;
+    return new PersonDto(person.getReference(), person.getFirstname() + " " + person.getSurname());
   };
 }
