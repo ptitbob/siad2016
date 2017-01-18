@@ -19,7 +19,7 @@ public class JpaTest {
 
   @BeforeClass
   public static void setUp() {
-    entityManagerFactory = Persistence.createEntityManagerFactory("siadTestPU");
+    entityManagerFactory = Persistence.createEntityManagerFactory("siadPU");
     entityManager = entityManagerFactory.createEntityManager();
   }
 
