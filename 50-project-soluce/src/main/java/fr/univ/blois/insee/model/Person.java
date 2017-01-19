@@ -30,6 +30,7 @@ import java.util.Objects;
     , @NamedQuery(name = Person.COUNT_FOR_DISTRICT, query = "select count(p) from Person p where p.address.city.district.inseeId = :" + Person.TARGET_INSEE)
     , @NamedQuery(name = Person.COUNT_FOR_CITY, query = "select count(p) from Person p where p.address.city.inseeId = :" + Person.TARGET_INSEE)
     , @NamedQuery(name = Person.COUNT_NO_ADDRESS, query = "select count(p) from Person p where p.address = null")
+    , @NamedQuery(name = Person.COUNT, query = "select count(p) from Person p")
 })
 public class Person implements Serializable {
 
@@ -56,6 +57,7 @@ public class Person implements Serializable {
   public static final String COUNT_FOR_CITY = "Person.COUNT_FOR_CITY";
   public static final String TARGET_INSEE = "targetInsee";
   public static final String COUNT_NO_ADDRESS = "Person.COUNT_NO_ADDRESS";
+  public static final String COUNT = "Person.COUNT";
 
   /**
    * Identifiant

@@ -116,6 +116,23 @@ public class PersonService {
     return getCountWith(Person.COUNT_FOR_CITY, inseeId);
   }
 
+  public Long getCountPersonWithoutAddress() {
+    return getCountWith(Person.COUNT_NO_ADDRESS);
+  }
+
+  public Long getCount() {
+    return getCountWith(Person.COUNT);
+  }
+
+  private Long getCountWith(String queryName) {
+    try {
+      return entityManager.createNamedQuery(queryName, Long.class)
+          .getSingleResult();
+    } catch (NonUniqueResultException | NoResultException e) {
+      return 0L;
+    }
+  }
+
   private Long getCountWith(String queryName, String inseeId) {
     try {
       return entityManager.createNamedQuery(queryName, Long.class)
@@ -126,12 +143,4 @@ public class PersonService {
     }
   }
 
-  public Long getCountPersonWithoutAddress() {
-    try {
-      return entityManager.createNamedQuery(Person.COUNT_NO_ADDRESS, Long.class)
-          .getSingleResult();
-    } catch (NonUniqueResultException | NoResultException e) {
-      return 0L;
-    }
-  }
 }

@@ -2,6 +2,7 @@ package fr.univ.blois.insee.ws.bean;
 
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URI;
 
@@ -14,11 +15,20 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 @XmlAccessorType(FIELD)
 public class StatisticDto {
 
-  @XmlAttribute
+  @XmlAttribute(name = "cible")
   private String target;
+
+  @XmlElement(name = "URI")
   private URI targetUrl;
+
+  @XmlElement(name = "Nombre")
   private Long personCountIn;
+
+  @XmlElement(name = "sansAdresse")
   private Long unassignedPerson;
+
+  @XmlElement(name = "total")
+  private Long total;
 
   public void setTarget(String target) {
     this.target = target;
@@ -50,5 +60,13 @@ public class StatisticDto {
 
   public Long getUnassignedPerson() {
     return unassignedPerson;
+  }
+
+  public void setTotal(Long total) {
+    this.total = total;
+  }
+
+  public Long getTotal() {
+    return total;
   }
 }

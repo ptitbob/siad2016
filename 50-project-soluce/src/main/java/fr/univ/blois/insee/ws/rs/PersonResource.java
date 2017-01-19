@@ -261,6 +261,7 @@ public class PersonResource implements PersonMapper, StatisticMapper {
       throw new StatisticQueryException();
     }
     statisticDto.setUnassignedPerson(personService.getCountPersonWithoutAddress());
+    statisticDto.setTotal(personService.getCount());
     return statisticDto;
   }
 
