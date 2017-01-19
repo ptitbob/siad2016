@@ -9,7 +9,7 @@ import fr.univ.blois.insee.ws.bean.RegionDetailDto;
 import fr.univ.blois.insee.ws.bean.RegionDto;
 import fr.univ.blois.insee.ws.bean.mapper.DistrictMapper;
 import fr.univ.blois.insee.ws.bean.mapper.RegionMapper;
-import fr.univ.blois.insee.ws.rs.Exception.IllegalInseeIdPresentationException;
+import fr.univ.blois.insee.ws.rs.exception.IllegalInseeIdPresentationException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
