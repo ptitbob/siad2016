@@ -2,8 +2,6 @@ package fr.univ.blois.insee.ws.rs.Exception;
 
 import fr.univ.blois.insee.model.Person;
 
-import javax.ws.rs.ServerErrorException;
-
 /**
  * @author François Robert
  */

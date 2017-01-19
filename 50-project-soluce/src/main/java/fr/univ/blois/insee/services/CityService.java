@@ -2,7 +2,6 @@ package fr.univ.blois.insee.services;
 
 import fr.univ.blois.insee.model.City;
 import fr.univ.blois.insee.model.District;
-import fr.univ.blois.insee.ws.bean.DistrictCityListDto;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

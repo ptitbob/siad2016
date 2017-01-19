@@ -1,6 +1,5 @@
 package fr.univ.blois.insee.ws.bean.mapper;
 
-import fr.univ.blois.insee.model.Address;
 import fr.univ.blois.insee.model.Person;
 import fr.univ.blois.insee.ws.bean.PersonDto;
 

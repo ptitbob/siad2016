@@ -4,7 +4,6 @@ import fr.univ.blois.insee.model.City;
 import fr.univ.blois.insee.model.ZipCode;
 import fr.univ.blois.insee.ws.bean.CityDto;
 
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 /**
