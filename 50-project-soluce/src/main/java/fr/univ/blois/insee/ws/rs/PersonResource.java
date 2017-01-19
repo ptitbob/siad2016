@@ -234,7 +234,7 @@ public class PersonResource implements PersonMapper {
     return Response.ok().build();
   }
 
-  private ZipCode getZipCode(@FormParam("codepostal") String zipCode, City city) {
+  private ZipCode getZipCode(String zipCode, City city) {
     return city.getZipCodeSet()
           .stream()
           .filter(cityZipCode -> zipCode.equals(cityZipCode.getZipCode()))
