@@ -26,8 +26,11 @@ public class AddressDto {
 
   private String zipCode;
 
+  public AddressDto() {
+  }
 
   public AddressDto(Long addressId, Integer floor, String line1, String line2) {
+    this();
     setId(addressId);
     setFloor(floor);
     setLine1(line1);
