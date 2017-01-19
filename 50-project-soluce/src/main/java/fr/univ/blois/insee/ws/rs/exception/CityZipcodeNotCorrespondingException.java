@@ -1,4 +1,4 @@
-package fr.univ.blois.insee.ws.rs.Exception;
+package fr.univ.blois.insee.ws.rs.exception;
 
 /**
  * @author François Robert

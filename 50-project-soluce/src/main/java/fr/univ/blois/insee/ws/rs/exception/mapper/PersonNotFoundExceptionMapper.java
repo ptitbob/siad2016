@@ -1,4 +1,4 @@
-package fr.univ.blois.insee.ws.rs.Exception.mapper;
+package fr.univ.blois.insee.ws.rs.exception.mapper;
 
 import fr.univ.blois.insee.services.exception.PersonNotFoundException;
 

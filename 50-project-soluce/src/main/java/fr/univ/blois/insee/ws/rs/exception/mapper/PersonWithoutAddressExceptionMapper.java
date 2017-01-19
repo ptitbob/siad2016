@@ -1,6 +1,6 @@
-package fr.univ.blois.insee.ws.rs.Exception.mapper;
+package fr.univ.blois.insee.ws.rs.exception.mapper;
 
-import fr.univ.blois.insee.ws.rs.Exception.PersonWithoutAddressException;
+import fr.univ.blois.insee.ws.rs.exception.PersonWithoutAddressException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

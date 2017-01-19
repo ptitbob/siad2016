@@ -1,6 +1,6 @@
-package fr.univ.blois.insee.ws.rs.Exception.mapper;
+package fr.univ.blois.insee.ws.rs.exception.mapper;
 
-import fr.univ.blois.insee.ws.rs.Exception.CityZipcodeNotCorrespondingException;
+import fr.univ.blois.insee.ws.rs.exception.CityZipcodeNotCorrespondingException;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

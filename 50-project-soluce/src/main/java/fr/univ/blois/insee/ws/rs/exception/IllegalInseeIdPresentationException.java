@@ -1,4 +1,4 @@
-package fr.univ.blois.insee.ws.rs.Exception;
+package fr.univ.blois.insee.ws.rs.exception;
 
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.core.Response;
