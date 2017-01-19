@@ -1,20 +1,30 @@
 package fr.univ.blois.insee.ws.rs;
 
 import fr.univ.blois.insee.model.City;
+import fr.univ.blois.insee.model.District;
 import fr.univ.blois.insee.model.Person;
+import fr.univ.blois.insee.model.Region;
 import fr.univ.blois.insee.model.ZipCode;
+import fr.univ.blois.insee.services.CityService;
+import fr.univ.blois.insee.services.DistrictService;
 import fr.univ.blois.insee.services.PersonService;
+import fr.univ.blois.insee.services.RegionService;
 import fr.univ.blois.insee.services.exception.CityNotFoundException;
+import fr.univ.blois.insee.services.exception.DistrictNotFoundExcetion;
+import fr.univ.blois.insee.services.exception.NoRegionFoundException;
 import fr.univ.blois.insee.services.exception.PersonNotFoundException;
 import fr.univ.blois.insee.ws.bean.AddressDto;
 import fr.univ.blois.insee.ws.bean.PersonDto;
+import fr.univ.blois.insee.ws.bean.StatisticDto;
 import fr.univ.blois.insee.ws.bean.mapper.PersonMapper;
-import fr.univ.blois.insee.ws.rs.Exception.CityZipcodeNotCorrespondingException;
-import fr.univ.blois.insee.ws.rs.Exception.PersonWithoutAddressException;
+import fr.univ.blois.insee.ws.rs.exception.CityZipcodeNotCorrespondingException;
+import fr.univ.blois.insee.ws.rs.exception.PersonWithoutAddressException;
+import fr.univ.blois.insee.ws.rs.exception.StatisticQueryException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotAcceptableException;
@@ -23,6 +33,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -44,9 +55,19 @@ import static javax.ws.rs.core.MediaType.*;
 public class PersonResource implements PersonMapper {
 
   private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-YYYY");
+  public static final String STATISTIC_DEFAULT_VALUE = "N/A";
 
   @EJB
   private PersonService personService;
+
+  @EJB
+  private RegionService regionService;
+
+  @EJB
+  private DistrictService districtService;
+
+  @EJB
+  private CityService cityService;
 
   @GET
   @Produces({APPLICATION_JSON, APPLICATION_XML})
@@ -167,7 +188,12 @@ public class PersonResource implements PersonMapper {
     City city = getCity(zipCode, townName);
     ZipCode addressZipCode = getZipCode(zipCode, city);
     personService.persistAndSetAddress(person, floor, line1, line2, addressZipCode, city);
-    return Response.ok()
+    URI addressURI = UriBuilder
+        .fromResource(PersonResource.class)
+        .path(person.getReference())
+        .path("adresse")
+        .build();
+    return Response.created(addressURI)
         .entity(
             httpHeaders.getAcceptableMediaTypes().contains(WILDCARD_TYPE) ? null : getPersonDto(person)
         )
@@ -213,6 +239,60 @@ public class PersonResource implements PersonMapper {
           .stream()
           .filter(cityZipCode -> zipCode.equals(cityZipCode.getZipCode()))
           .findFirst().orElse(null);
+  }
+
+  @GET
+  @Produces({APPLICATION_JSON, APPLICATION_XML})
+  @Path("/statistiques")
+  public StatisticDto getStatistic(
+      @QueryParam("region") @DefaultValue(STATISTIC_DEFAULT_VALUE) String regionInsee
+      , @QueryParam("departement") @DefaultValue(STATISTIC_DEFAULT_VALUE) String districtInsee
+      , @QueryParam("ville") @DefaultValue(STATISTIC_DEFAULT_VALUE) String cityInsee
+  ) throws NoRegionFoundException, DistrictNotFoundExcetion, CityNotFoundException, StatisticQueryException {
+    StatisticDto statisticDto;
+    if (!STATISTIC_DEFAULT_VALUE.equals(regionInsee)) {
+      statisticDto = getStatisticForRegion(regionInsee);
+    } else if (!STATISTIC_DEFAULT_VALUE.equals(districtInsee)) {
+      statisticDto = getStatisticForDistrict(districtInsee);
+    } else if (!STATISTIC_DEFAULT_VALUE.equals(cityInsee)) {
+      statisticDto = getStatisticForCity(cityInsee);
+    } else {
+      throw new StatisticQueryException();
+    }
+    statisticDto.setUnassignedPerson(personService.getCountPersonWithoutAddress());
+    return statisticDto;
+  }
+
+  private StatisticDto getStatisticForCity(@QueryParam("ville") @DefaultValue(STATISTIC_DEFAULT_VALUE) String cityInsee) throws CityNotFoundException {
+    City city = cityService.getCityByInsee(cityInsee);
+    return fillStatisticWith(
+        "Ville"
+        , UriBuilder.fromResource(CityResource.class).path(city.getInseeId()).build()
+        , personService.getCountForCity(city.getInseeId()));
+  }
+
+  private StatisticDto getStatisticForDistrict(@QueryParam("departement") @DefaultValue(STATISTIC_DEFAULT_VALUE) String districtInsee) throws DistrictNotFoundExcetion {
+    District district = districtService.getDistrictByInsee(districtInsee);
+    return fillStatisticWith(
+        "Département"
+        , UriBuilder.fromResource(DistrictResource.class).path(district.getInseeId()).build()
+        , personService.getCountForDistrict(district.getInseeId()));
+  }
+
+  private StatisticDto getStatisticForRegion(@QueryParam("region") @DefaultValue(STATISTIC_DEFAULT_VALUE) String regionInsee) throws NoRegionFoundException {
+    Region region = regionService.getRegionByInseeId(regionInsee);
+    return fillStatisticWith(
+        "Région"
+        , UriBuilder.fromResource(RegionResource.class).path(region.getInseeId()).build()
+        , personService.getCountForRegion(region.getInseeId()));
+  }
+
+  private StatisticDto fillStatisticWith(String target, URI targetURI, Long countIn) {
+    StatisticDto statisticDto = new StatisticDto();
+    statisticDto.setTarget(target);
+    statisticDto.setTargetUrl(targetURI);
+    statisticDto.setPersonCountIn(countIn);
+    return statisticDto;
   }
 
   private City getCity(@FormParam("codepostal") String zipCode, @FormParam("ville") String townName) throws CityNotFoundException, CityZipcodeNotCorrespondingException {

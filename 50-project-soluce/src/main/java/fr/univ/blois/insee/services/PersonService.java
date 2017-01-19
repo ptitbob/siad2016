@@ -104,4 +104,34 @@ public class PersonService {
     }
   }
 
+  public Long getCountForRegion(String inseeId) {
+    return getCountWith(Person.COUNT_FOR_REGION, inseeId);
+  }
+
+  public Long getCountForDistrict(String inseeId) {
+    return getCountWith(Person.COUNT_FOR_DISTRICT, inseeId);
+  }
+
+  public Long getCountForCity(String inseeId) {
+    return getCountWith(Person.COUNT_FOR_CITY, inseeId);
+  }
+
+  private Long getCountWith(String queryName, String inseeId) {
+    try {
+      return entityManager.createNamedQuery(queryName, Long.class)
+          .setParameter(Person.TARGET_INSEE, inseeId)
+          .getSingleResult();
+    } catch (NonUniqueResultException | NoResultException e) {
+      return 0L;
+    }
+  }
+
+  public Long getCountPersonWithoutAddress() {
+    try {
+      return entityManager.createNamedQuery(Person.COUNT_NO_ADDRESS, Long.class)
+          .getSingleResult();
+    } catch (NonUniqueResultException | NoResultException e) {
+      return 0L;
+    }
+  }
 }

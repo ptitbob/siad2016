@@ -2,9 +2,12 @@ package fr.univ.blois.insee.services;
 
 import fr.univ.blois.insee.model.District;
 import fr.univ.blois.insee.model.Region;
+import fr.univ.blois.insee.services.exception.DistrictNotFoundExcetion;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -28,4 +31,13 @@ public class DistrictService {
         .getResultList();
   }
 
+  public District getDistrictByInsee(String districtInsee) throws DistrictNotFoundExcetion {
+    try {
+      return entityManager.createNamedQuery(District.FIND_BY_INSEEID, District.class)
+          .setParameter(District.INSEEID, districtInsee)
+          .getSingleResult();
+    } catch (NoResultException | NonUniqueResultException e) {
+      throw new DistrictNotFoundExcetion(districtInsee);
+    }
+  }
 }

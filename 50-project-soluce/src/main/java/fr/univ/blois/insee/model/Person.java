@@ -23,154 +23,165 @@ import java.util.Objects;
 @Entity
 @SequenceGenerator(name = "person_sequence", sequenceName = "person_sequence", allocationSize = 1)
 @NamedQueries({
-        @NamedQuery(name = Person.FIND_ALL, query = "select p from Person p")
-        , @NamedQuery(name = Person.FIND_BY_REFERENCE, query = "select p from Person p where p.reference = :" + Person.REFERENCE)
-        , @NamedQuery(name = Person.FIND_BY_CITY, query = "select p from Person p where p.address.city.inseeId = :" + City.INSEEID)
+    @NamedQuery(name = Person.FIND_ALL, query = "select p from Person p")
+    , @NamedQuery(name = Person.FIND_BY_REFERENCE, query = "select p from Person p where p.reference = :" + Person.REFERENCE)
+    , @NamedQuery(name = Person.FIND_BY_CITY, query = "select p from Person p where p.address.city.inseeId = :" + City.INSEEID)
+    , @NamedQuery(name = Person.COUNT_FOR_REGION, query = "select count(p) from Person p where p.address.city.district.region.inseeId = :" + Person.TARGET_INSEE)
+    , @NamedQuery(name = Person.COUNT_FOR_DISTRICT, query = "select count(p) from Person p where p.address.city.district.inseeId = :" + Person.TARGET_INSEE)
+    , @NamedQuery(name = Person.COUNT_FOR_CITY, query = "select count(p) from Person p where p.address.city.inseeId = :" + Person.TARGET_INSEE)
+    , @NamedQuery(name = Person.COUNT_NO_ADDRESS, query = "select count(p) from Person p where p.address = null")
 })
 public class Person implements Serializable {
 
-    private static final long serialVersionUID = -3545547914183480156L;
+  private static final long serialVersionUID = -3545547914183480156L;
 
-    /**
-     * Renvoi la liste des personnes
-     */
-    public static final String FIND_ALL = "Person.FIND_ALL";
-    /**
-     * Renvoi une personne selon sa reference
-     */
-    public static final String FIND_BY_REFERENCE = "Person.FIND_BY_REFERENCE";
-    /**
-     * Renvoi la liste des personnes d'une ville
-     */
-    public static final String FIND_BY_CITY = "Person.FIND_BY_CITY";
+  /**
+   * Renvoi la liste des personnes
+   */
+  public static final String FIND_ALL = "Person.FIND_ALL";
+  /**
+   * Renvoi une personne selon sa reference
+   */
+  public static final String FIND_BY_REFERENCE = "Person.FIND_BY_REFERENCE";
+  /**
+   * Renvoi la liste des personnes d'une ville
+   */
+  public static final String FIND_BY_CITY = "Person.FIND_BY_CITY";
 
-    public static final String REFERENCE = "reference";
-    private static final String ADDRESS_FK = "ADDRESS_FK";
+  public static final String REFERENCE = "reference";
+  private static final String ADDRESS_FK = "ADDRESS_FK";
 
-    /**
-     * Identifiant
-     */
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_sequence")
-    private Long id;
+  public static final String COUNT_FOR_REGION = "Person.COUNT_FOR_REGION";
+  public static final String COUNT_FOR_DISTRICT = "Person.COUNT_FOR_DISTRICT";
+  public static final String COUNT_FOR_CITY = "Person.COUNT_FOR_CITY";
+  public static final String TARGET_INSEE = "targetInsee";
+  public static final String COUNT_NO_ADDRESS = "Person.COUNT_NO_ADDRESS";
 
-    /**
-     * Prénom
-     */
-    @Column(length = 100)
-    private String firstname;
+  /**
+   * Identifiant
+   */
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_sequence")
+  private Long id;
 
-    /**
-     * Nom de famille
-     */
-    @Column(length = 100)
-    private String surname;
+  /**
+   * Prénom
+   */
+  @Column(length = 100)
+  private String firstname;
 
-    /**
-     * Date de naissance
-     */
-    @Temporal(TemporalType.DATE)
-    private Date birth;
+  /**
+   * Nom de famille
+   */
+  @Column(length = 100)
+  private String surname;
 
-    /**
-     * N° unique
-     */
-    @Column(length = 7)
-    private String reference;
+  /**
+   * Date de naissance
+   */
+  @Temporal(TemporalType.DATE)
+  private Date birth;
 
-    /**
-     * Adresse
-     */
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = ADDRESS_FK, referencedColumnName = Address.ADDRESS_ID)
-    private Address address;
+  /**
+   * N° unique
+   */
+  @Column(length = 7)
+  private String reference;
 
-    /**
-     * Constructeur
-     */
-    public Person() {
-    }
+  /**
+   * Adresse
+   */
+  @OneToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = ADDRESS_FK, referencedColumnName = Address.ADDRESS_ID)
+  private Address address;
 
-    public Person(String firstname, String surname, Date birth) {
-        this();
-        setFirstname(firstname);
-        setSurname(surname);
-        setBirth(birth);
-    }
+  /**
+   * Constructeur
+   */
+  public Person() {
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Person(String firstname, String surname, Date birth) {
+    this();
+    setFirstname(firstname);
+    setSurname(surname);
+    setBirth(birth);
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public Date getBirth() {
-        return birth;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
+  public Date getBirth() {
+    return birth;
+  }
 
-    public String getFirstname() {
-        return firstname;
-    }
+  public void setBirth(Date birth) {
+    this.birth = birth;
+  }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
+  public String getFirstname() {
+    return firstname;
+  }
 
-    public String getReference() {
-        return reference;
-    }
+  public void setFirstname(String firstname) {
+    this.firstname = firstname;
+  }
 
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
+  public String getReference() {
+    return reference;
+  }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
+  public void setReference(String reference) {
+    this.reference = reference;
+  }
 
-    public String getSurname() {
-        return surname;
-    }
+  public static long getSerialVersionUID() {
+    return serialVersionUID;
+  }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
+  public String getSurname() {
+    return surname;
+  }
 
-    public Address getAddress() {
-        return address;
-    }
+  public void setSurname(String surname) {
+    this.surname = surname;
+  }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+  public Address getAddress() {
+    return address;
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Person)) return false;
-        Person person = (Person) o;
-        return Objects.equals(getFirstname(), person.getFirstname()) &&
-                Objects.equals(getSurname(), person.getSurname()) &&
-                Objects.equals(getBirth(), person.getBirth());
-    }
+  public void setAddress(Address address) {
+    this.address = address;
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getFirstname(), getSurname());
-    }
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Person)) return false;
+    Person person = (Person) o;
+    return Objects.equals(getFirstname(), person.getFirstname()) &&
+        Objects.equals(getSurname(), person.getSurname()) &&
+        Objects.equals(getBirth(), person.getBirth());
+  }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "firstname='" + firstname + '\'' +
-                ", surname='" + surname + '\'' +
-                ", id=" + id +
-                ", reference='" + reference + '\'' +
-                '}';
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(getFirstname(), getSurname());
+  }
+
+  @Override
+  public String toString() {
+    return "Person{" +
+        "firstname='" + firstname + '\'' +
+        ", surname='" + surname + '\'' +
+        ", id=" + id +
+        ", reference='" + reference + '\'' +
+        '}';
+  }
 }
