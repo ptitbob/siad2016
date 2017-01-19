@@ -263,7 +263,7 @@ public class PersonResource implements PersonMapper {
     return statisticDto;
   }
 
-  private StatisticDto getStatisticForCity(@QueryParam("ville") @DefaultValue(STATISTIC_DEFAULT_VALUE) String cityInsee) throws CityNotFoundException {
+  private StatisticDto getStatisticForCity(String cityInsee) throws CityNotFoundException {
     City city = cityService.getCityByInsee(cityInsee);
     return fillStatisticWith(
         "Ville"
@@ -271,7 +271,7 @@ public class PersonResource implements PersonMapper {
         , personService.getCountForCity(city.getInseeId()));
   }
 
-  private StatisticDto getStatisticForDistrict(@QueryParam("departement") @DefaultValue(STATISTIC_DEFAULT_VALUE) String districtInsee) throws DistrictNotFoundExcetion {
+  private StatisticDto getStatisticForDistrict(String districtInsee) throws DistrictNotFoundExcetion {
     District district = districtService.getDistrictByInsee(districtInsee);
     return fillStatisticWith(
         "Département"
@@ -279,7 +279,7 @@ public class PersonResource implements PersonMapper {
         , personService.getCountForDistrict(district.getInseeId()));
   }
 
-  private StatisticDto getStatisticForRegion(@QueryParam("region") @DefaultValue(STATISTIC_DEFAULT_VALUE) String regionInsee) throws NoRegionFoundException {
+  private StatisticDto getStatisticForRegion(String regionInsee) throws NoRegionFoundException {
     Region region = regionService.getRegionByInseeId(regionInsee);
     return fillStatisticWith(
         "Région"
@@ -295,8 +295,7 @@ public class PersonResource implements PersonMapper {
     return statisticDto;
   }
 
-  private City getCity(@FormParam("codepostal") String zipCode, @FormParam("ville") String townName) throws CityNotFoundException, CityZipcodeNotCorrespondingException {
-    List<City> cityList = personService.getCityListForZipCode(zipCode);
+  private City getCity(String zipCode, String townName) throws CityNotFoundException, CityZipcodeNotCorrespondingException {
     City city = personService.getCityListForZipCode(zipCode)
         .stream()
         .filter(cityInList -> townName.toUpperCase().equals(cityInList.getName().toUpperCase()))
