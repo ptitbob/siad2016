@@ -17,6 +17,7 @@ import fr.univ.blois.insee.ws.bean.AddressDto;
 import fr.univ.blois.insee.ws.bean.PersonDto;
 import fr.univ.blois.insee.ws.bean.StatisticDto;
 import fr.univ.blois.insee.ws.bean.mapper.PersonMapper;
+import fr.univ.blois.insee.ws.bean.mapper.StatisticMapper;
 import fr.univ.blois.insee.ws.rs.exception.CityZipcodeNotCorrespondingException;
 import fr.univ.blois.insee.ws.rs.exception.PersonWithoutAddressException;
 import fr.univ.blois.insee.ws.rs.exception.StatisticQueryException;
@@ -52,7 +53,7 @@ import static javax.ws.rs.core.MediaType.*;
  * @author François Robert
  */
 @Path("personnes")
-public class PersonResource implements PersonMapper {
+public class PersonResource implements PersonMapper, StatisticMapper {
 
   private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-YYYY");
   public static final String STATISTIC_DEFAULT_VALUE = "N/A";
@@ -285,14 +286,6 @@ public class PersonResource implements PersonMapper {
         "Région"
         , UriBuilder.fromResource(RegionResource.class).path(region.getInseeId()).build()
         , personService.getCountForRegion(region.getInseeId()));
-  }
-
-  private StatisticDto fillStatisticWith(String target, URI targetURI, Long countIn) {
-    StatisticDto statisticDto = new StatisticDto();
-    statisticDto.setTarget(target);
-    statisticDto.setTargetUrl(targetURI);
-    statisticDto.setPersonCountIn(countIn);
-    return statisticDto;
   }
 
   private City getCity(String zipCode, String townName) throws CityNotFoundException, CityZipcodeNotCorrespondingException {
