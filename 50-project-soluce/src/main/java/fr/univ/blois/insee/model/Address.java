@@ -70,6 +70,14 @@ public class Address implements Serializable {
     public Address() {
     }
 
+    public Address(String line1, String line2, Integer floor, City city, ZipCode zipCode) {
+        this.line1 = line1;
+        Line2 = line2;
+        this.floor = floor;
+        this.city = city;
+        this.zipCode = zipCode;
+    }
+
     public Long getId() {
         return id;
     }

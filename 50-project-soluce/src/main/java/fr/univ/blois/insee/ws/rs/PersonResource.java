@@ -1,10 +1,16 @@
 package fr.univ.blois.insee.ws.rs;
 
+import fr.univ.blois.insee.model.City;
 import fr.univ.blois.insee.model.Person;
+import fr.univ.blois.insee.model.ZipCode;
 import fr.univ.blois.insee.services.PersonService;
+import fr.univ.blois.insee.services.exception.CityNotFoundException;
 import fr.univ.blois.insee.services.exception.PersonNotFoundException;
+import fr.univ.blois.insee.ws.bean.AddressDto;
 import fr.univ.blois.insee.ws.bean.PersonDto;
 import fr.univ.blois.insee.ws.bean.mapper.PersonMapper;
+import fr.univ.blois.insee.ws.rs.Exception.CityZipcodeNotCorrespondingException;
+import fr.univ.blois.insee.ws.rs.Exception.PersonWithoutAddressException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -38,6 +44,7 @@ import static javax.ws.rs.core.MediaType.*;
 public class PersonResource implements PersonMapper {
 
   private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-YYYY");
+
   @EJB
   private PersonService personService;
 
@@ -127,4 +134,99 @@ public class PersonResource implements PersonMapper {
     }
     return Response.ok().build();
   }
+
+  @GET
+  @Path("/{ref:[A-Z,0-9]*}/adresse")
+  @Produces({APPLICATION_JSON, APPLICATION_XML})
+  public AddressDto getPersonAddress(
+      @PathParam("ref") String personReference
+  ) throws PersonNotFoundException, PersonWithoutAddressException {
+    Person person = personService.getForReference(personReference);
+    if (person.getAddress() == null) {
+      throw new PersonWithoutAddressException(person);
+    } else {
+      return getAddressDto(person.getAddress());
+    }
+  }
+
+
+  @POST
+  @Path("/{ref:[A-Z,0-9]*}/adresse")
+  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+  @Produces({WILDCARD, APPLICATION_JSON, APPLICATION_XML})
+  public Response createAndSetAddressToPerson(
+      @Context HttpHeaders httpHeaders
+      , @PathParam("ref") String personReference
+      , @FormParam("etage") String floor
+      , @FormParam("ligne1") String line1
+      , @FormParam("ligne2") String line2
+      , @FormParam("codepostal") String zipCode
+      , @FormParam("ville") String townName
+  ) throws CityNotFoundException, PersonNotFoundException, CityZipcodeNotCorrespondingException {
+    Person person = personService.getForReference(personReference);
+    City city = getCity(zipCode, townName);
+    ZipCode addressZipCode = getZipCode(zipCode, city);
+    personService.persistAndSetAddress(person, floor, line1, line2, addressZipCode, city);
+    return Response.ok()
+        .entity(
+            httpHeaders.getAcceptableMediaTypes().contains(WILDCARD_TYPE) ? null : getPersonDto(person)
+        )
+        .build();
+  }
+
+  @PUT
+  @Path("/{ref:[A-Z,0-9]*}/adresse")
+  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+  @Produces({WILDCARD, APPLICATION_JSON, APPLICATION_XML})
+  public Response updateAddress(
+      @Context HttpHeaders httpHeaders
+      , @PathParam("ref") String personReference
+      , @FormParam("etage") String floor
+      , @FormParam("ligne1") String line1
+      , @FormParam("ligne2") String line2
+      , @FormParam("codepostal") String zipCode
+      , @FormParam("ville") String townName
+  ) throws CityNotFoundException, PersonNotFoundException, CityZipcodeNotCorrespondingException, PersonWithoutAddressException {
+    Person person = personService.getForReference(personReference);
+    if (person.getAddress() == null) {
+      throw new PersonWithoutAddressException(person);
+    }
+    City city = getCity(zipCode, townName);
+    ZipCode addressZipCode = getZipCode(zipCode, city);
+    personService.mergeAddress(person, floor, line1, line2, addressZipCode, city);
+    return Response.ok()
+        .entity(
+            httpHeaders.getAcceptableMediaTypes().contains(WILDCARD_TYPE) ? null : getPersonDto(person)
+        )
+        .build();
+  }
+
+  @DELETE
+  @Path("/{ref:[A-Z,0-9]*}/adresse")
+  public Response removeAddressFromPerson(@PathParam("ref") String personReference) throws PersonNotFoundException {
+    personService.removeAddressFromPerson(personReference);
+    return Response.ok().build();
+  }
+
+  private ZipCode getZipCode(@FormParam("codepostal") String zipCode, City city) {
+    return city.getZipCodeSet()
+          .stream()
+          .filter(cityZipCode -> zipCode.equals(cityZipCode.getZipCode()))
+          .findFirst().orElse(null);
+  }
+
+  private City getCity(@FormParam("codepostal") String zipCode, @FormParam("ville") String townName) throws CityNotFoundException, CityZipcodeNotCorrespondingException {
+    List<City> cityList = personService.getCityListForZipCode(zipCode);
+    City city = personService.getCityListForZipCode(zipCode)
+        .stream()
+        .filter(cityInList -> townName.toUpperCase().equals(cityInList.getName().toUpperCase()))
+        .findFirst()
+        .orElse(null);
+    if (city == null) {
+      // primaire - faire evoluer ;)
+      throw new CityZipcodeNotCorrespondingException(townName, zipCode);
+    }
+    return city;
+  }
+
 }

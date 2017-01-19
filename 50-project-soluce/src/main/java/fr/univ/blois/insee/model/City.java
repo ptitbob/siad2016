@@ -32,7 +32,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
         , @NamedQuery(name = City.FIND_BY_REGION, query = "select c from City c where c.region.inseeId = :" + Region.INSEEID)
         , @NamedQuery(name = City.FIND_CITY_BY_STATUS_FOR_DISTRICT, query = "select c from City c where c.district.inseeId = :" + District.INSEEID + " and c.cityStatus.label = :" + CityStatus.CITY_LABEL)
         , @NamedQuery(name = City.FIND_BY_INSEE, query = "select c from City c where c.inseeId = :" + City.INSEEID)
-        , @NamedQuery(name = City.GET_BY_ZIPCODE, query = "select z.city from ZipCode z where z.zipCode = :" + ZipCode.ZIPCODE)
+        , @NamedQuery(name = City.GET_BY_ZIPCODE, query = "select distinct z.city from ZipCode z where z.zipCode = :" + ZipCode.ZIPCODE)
 })
 public class City implements Serializable {
 

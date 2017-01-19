@@ -1,6 +1,10 @@
 package fr.univ.blois.insee.services;
 
+import fr.univ.blois.insee.model.Address;
+import fr.univ.blois.insee.model.City;
 import fr.univ.blois.insee.model.Person;
+import fr.univ.blois.insee.model.ZipCode;
+import fr.univ.blois.insee.services.exception.CityNotFoundException;
 import fr.univ.blois.insee.services.exception.PersonNotFoundException;
 
 import javax.ejb.Stateless;
@@ -49,4 +53,55 @@ public class PersonService {
   public void update(Person person) {
     entityManager.merge(person);
   }
+
+  public List<City> getCityListForZipCode(String zipCode) throws CityNotFoundException {
+    List<City> cityList = entityManager.createNamedQuery(City.GET_BY_ZIPCODE, City.class)
+        .setParameter(ZipCode.ZIPCODE, zipCode)
+        .getResultList();
+    if (cityList.isEmpty()) {
+      throw new CityNotFoundException("Aucune ville trouvée avec le code postal " + zipCode);
+    } else {
+      return cityList;
+    }
+  }
+
+
+  public Person persistAndSetAddress(Person person, String floor, String line1, String line2, ZipCode zipCode, City city) {
+    Address address = new Address();
+    setAddressValues(floor, line1, line2, zipCode, city, address);
+    entityManager.persist(address);
+    person.setAddress(address);
+    entityManager.merge(person);
+    return person;
+  }
+
+  public Person mergeAddress(Person person, String floor, String line1, String line2, ZipCode zipCode, City city) {
+    Address address = person.getAddress();
+    setAddressValues(floor, line1, line2, zipCode, city, address);
+    entityManager.merge(address);
+    return person;
+  }
+
+  private void setAddressValues(String floor, String line1, String line2, ZipCode zipCode, City city, Address address) {
+    try {
+      address.setFloor(Integer.valueOf(floor));
+    } catch (NumberFormatException e) {
+      address.setFloor(null);
+    }
+    address.setLine1(line1);
+    address.setLine2(line2);
+    address.setZipCode(zipCode);
+    address.setCity(city);
+  }
+
+  public void removeAddressFromPerson(String personReference) throws PersonNotFoundException {
+    Person person = getForReference(personReference);
+    Address address = person.getAddress();
+    person.setAddress(null);
+    entityManager.persist(person);
+    if (address != null) {
+      entityManager.remove(address);
+    }
+  }
+
 }

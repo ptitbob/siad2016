@@ -13,13 +13,23 @@ import java.util.stream.Collectors;
 public interface CityMapper {
 
   default CityDto getCityDto(City city) {
+    CityDto cityDto = getCityDtoWithoutZipCode(city);
+    if (city != null) {
+      cityDto.setZipcodeList(city.getZipCodeSet()
+          .stream()
+          .map(ZipCode::getZipCode)
+          .collect(Collectors.toList())
+      );
+    }
+    return cityDto;
+  }
+
+  default CityDto getCityDtoWithoutZipCode(City city) {
+    if (city == null) {
+      return new CityDto();
+    }
     CityDto cityDto = new CityDto(city.getInseeId(), city.getName());
     cityDto.setCityStatus(city.getCityStatus().getLabel());
-    cityDto.setZipcodeList(city.getZipCodeSet()
-        .stream()
-        .map(ZipCode::getZipCode)
-        .collect(Collectors.toList())
-    );
     return cityDto;
   }
 }

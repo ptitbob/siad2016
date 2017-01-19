@@ -21,6 +21,7 @@ public class PersonDto implements Serializable {
 
   @XmlElement(name = "nom")
   private String name;
+  private AddressDto address;
 
   public PersonDto() {
   }
@@ -45,5 +46,13 @@ public class PersonDto implements Serializable {
 
   public void setReference(String reference) {
     this.reference = reference;
+  }
+
+  public void setAddress(AddressDto address) {
+    this.address = address;
+  }
+
+  public AddressDto getAddress() {
+    return address;
   }
 }
