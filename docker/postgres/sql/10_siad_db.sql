@@ -5,7 +5,8 @@ CREATE TABLE "city" (
     "name" character varying(100),
     "citystatus_id" bigint,
     "district_id" bigint,
-    "region_region_id" bigint
+    "region_region_id" bigint,
+    CONSTRAINT pk_city PRIMARY KEY (id)
 );
 
 
@@ -97,7 +98,8 @@ CREATE TABLE "sequence" (
 CREATE TABLE "zipcode" (
     "id" bigint NOT NULL,
     "zipcode" character varying(6),
-    "city_id" bigint
+    "city_id" bigint,
+    CONSTRAINT pd_zipcode PRIMARY KEY (id)
 );
 
 
