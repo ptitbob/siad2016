@@ -136,7 +136,7 @@ public class PersonResource implements PersonMapper, StatisticMapper {
     }
   }
 
-  private Date getDateOfBirthFrom(@FormParam("naissance") String dateOfBirth) {
+  private Date getDateOfBirthFrom(String dateOfBirth) {
     Date birth;
     try {
       birth = DATE_FORMAT.parse(dateOfBirth);
